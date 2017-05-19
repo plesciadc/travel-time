@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D000A461E69EC07001C79E3 /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D000A451E69EC07001C79E3 /* WorkViewController.swift */; };
 		5D035EB01E6600A000D38202 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035EAF1E6600A000D38202 /* AppDelegate.swift */; };
-		5D035EB21E6600A000D38202 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035EB11E6600A000D38202 /* ViewController.swift */; };
+		5D035EB21E6600A000D38202 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035EB11E6600A000D38202 /* HomeViewController.swift */; };
 		5D035EB51E6600A000D38202 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D035EB31E6600A000D38202 /* Main.storyboard */; };
 		5D035EB71E6600A000D38202 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D035EB61E6600A000D38202 /* Assets.xcassets */; };
 		5D035EBA1E6600A000D38202 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D035EB81E6600A000D38202 /* LaunchScreen.storyboard */; };
@@ -20,6 +21,14 @@
 		5D035ED71E6600A000D38202 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035ED61E6600A000D38202 /* ExtensionDelegate.swift */; };
 		5D035ED91E6600A000D38202 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035ED81E6600A000D38202 /* NotificationController.swift */; };
 		5D035EDB1E6600A000D38202 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D035EDA1E6600A000D38202 /* Assets.xcassets */; };
+		5D035EEB1E66053100D38202 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D035EEA1E66053100D38202 /* HomeViewController.swift */; };
+		5D268C3E1E6B3691003074CA /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D268C3D1E6B3691003074CA /* CustomViewController.swift */; };
+		5D8EA1B81ECF6E75000C05F6 /* AddressSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8EA1B71ECF6E75000C05F6 /* AddressSettingsViewController.swift */; };
+		5D9F832C1E674E16005483DB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9F832B1E674E16005483DB /* CoreLocation.framework */; };
+		5DC7ABB81E6F169B00E20255 /* TravelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC7ABB71E6F169B00E20255 /* TravelData.swift */; };
+		5DF3B6521ECE1C670074C62B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF3B6511ECE1C670074C62B /* SettingsViewController.swift */; };
+		5DF99C951ECE0C8F00B4722B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF99C931ECE0C8F00B4722B /* BaseViewController.swift */; };
+		5DF99C961ECE0C8F00B4722B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF99C941ECE0C8F00B4722B /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,9 +74,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5D000A451E69EC07001C79E3 /* WorkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
 		5D035EAC1E6600A000D38202 /* Travel Time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Travel Time.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D035EAF1E6600A000D38202 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5D035EB11E6600A000D38202 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5D035EB11E6600A000D38202 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5D035EB41E6600A000D38202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5D035EB61E6600A000D38202 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D035EB91E6600A000D38202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,6 +93,14 @@
 		5D035ED81E6600A000D38202 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		5D035EDA1E6600A000D38202 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D035EDC1E6600A000D38202 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D035EEA1E66053100D38202 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5D268C3D1E6B3691003074CA /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		5D8EA1B71ECF6E75000C05F6 /* AddressSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSettingsViewController.swift; sourceTree = "<group>"; };
+		5D9F832B1E674E16005483DB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5DC7ABB71E6F169B00E20255 /* TravelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelData.swift; sourceTree = "<group>"; };
+		5DF3B6511ECE1C670074C62B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5DF99C931ECE0C8F00B4722B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5DF99C941ECE0C8F00B4722B /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D9F832C1E674E16005483DB /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +129,7 @@
 				5D035EC21E6600A000D38202 /* Travel Time WatchKit App */,
 				5D035ED11E6600A000D38202 /* Travel Time WatchKit Extension */,
 				5D035EAD1E6600A000D38202 /* Products */,
+				5D9F832A1E674E16005483DB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,10 +147,14 @@
 			isa = PBXGroup;
 			children = (
 				5D035EAF1E6600A000D38202 /* AppDelegate.swift */,
-				5D035EB11E6600A000D38202 /* ViewController.swift */,
+				5D035EB11E6600A000D38202 /* HomeViewController.swift */,
+				5DF3B6511ECE1C670074C62B /* SettingsViewController.swift */,
+				5D8EA1B71ECF6E75000C05F6 /* AddressSettingsViewController.swift */,
+				5DF99C931ECE0C8F00B4722B /* BaseViewController.swift */,
+				5DF99C941ECE0C8F00B4722B /* MenuViewController.swift */,
 				5D035EB31E6600A000D38202 /* Main.storyboard */,
-				5D035EB61E6600A000D38202 /* Assets.xcassets */,
 				5D035EB81E6600A000D38202 /* LaunchScreen.storyboard */,
+				5D035EB61E6600A000D38202 /* Assets.xcassets */,
 				5D035EBB1E6600A000D38202 /* Info.plist */,
 			);
 			path = "Travel Time";
@@ -150,8 +174,12 @@
 			isa = PBXGroup;
 			children = (
 				5D035ED41E6600A000D38202 /* InterfaceController.swift */,
+				5DC7ABB71E6F169B00E20255 /* TravelData.swift */,
 				5D035ED61E6600A000D38202 /* ExtensionDelegate.swift */,
 				5D035ED81E6600A000D38202 /* NotificationController.swift */,
+				5D035EEA1E66053100D38202 /* HomeViewController.swift */,
+				5D000A451E69EC07001C79E3 /* WorkViewController.swift */,
+				5D268C3D1E6B3691003074CA /* CustomViewController.swift */,
 				5D035EDA1E6600A000D38202 /* Assets.xcassets */,
 				5D035EDC1E6600A000D38202 /* Info.plist */,
 				5D035ED21E6600A000D38202 /* Supporting Files */,
@@ -165,6 +193,14 @@
 				5D035ED31E6600A000D38202 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5D9F832A1E674E16005483DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D9F832B1E674E16005483DB /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,16 +273,31 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = KM77S9HEXJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					5D035EBD1E6600A000D38202 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = KM77S9HEXJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					5D035ECC1E6600A000D38202 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = KM77S9HEXJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -305,8 +356,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D035EB21E6600A000D38202 /* ViewController.swift in Sources */,
+				5D035EB21E6600A000D38202 /* HomeViewController.swift in Sources */,
+				5D8EA1B81ECF6E75000C05F6 /* AddressSettingsViewController.swift in Sources */,
 				5D035EB01E6600A000D38202 /* AppDelegate.swift in Sources */,
+				5DF99C951ECE0C8F00B4722B /* BaseViewController.swift in Sources */,
+				5DF3B6521ECE1C670074C62B /* SettingsViewController.swift in Sources */,
+				5DF99C961ECE0C8F00B4722B /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,9 +369,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D000A461E69EC07001C79E3 /* WorkViewController.swift in Sources */,
+				5DC7ABB81E6F169B00E20255 /* TravelData.swift in Sources */,
 				5D035ED91E6600A000D38202 /* NotificationController.swift in Sources */,
 				5D035ED71E6600A000D38202 /* ExtensionDelegate.swift in Sources */,
+				5D268C3E1E6B3691003074CA /* CustomViewController.swift in Sources */,
 				5D035ED51E6600A000D38202 /* InterfaceController.swift in Sources */,
+				5D035EEB1E66053100D38202 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +630,7 @@
 				5D035EE11E6600A000D38202 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5D035EE31E6600A000D38202 /* Build configuration list for PBXNativeTarget "Travel Time WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -579,6 +639,7 @@
 				5D035EE51E6600A000D38202 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5D035EE71E6600A000D38202 /* Build configuration list for PBXNativeTarget "Travel Time" */ = {
 			isa = XCConfigurationList;
@@ -587,6 +648,7 @@
 				5D035EE91E6600A000D38202 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

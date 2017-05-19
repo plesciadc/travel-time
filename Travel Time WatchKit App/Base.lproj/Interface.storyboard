@@ -1,16 +1,90 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11055"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Travel_Time_WatchKit_Extension">
+                    <items>
+                        <label width="156" alignment="left" text="Select a Destination" textAlignment="center" minimumScaleFactor="0.80000000000000004" id="o54-j6-lkT"/>
+                        <button width="1" alignment="left" title="Home" id="EH8-zt-M7U">
+                            <connections>
+                                <action selector="homeClicked" destination="AgC-eL-Hgc" id="Td7-yn-io2"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Work" id="tOi-0D-vPC">
+                            <connections>
+                                <action selector="workClicked" destination="AgC-eL-Hgc" id="Buk-3X-qNZ"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Custom" id="iFa-I8-gWT">
+                            <connections>
+                                <action selector="customClicked" destination="AgC-eL-Hgc" id="1cI-5M-l6n"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="customButton" destination="iFa-I8-gWT" id="eqY-l8-EJn"/>
+                        <outlet property="homeButton" destination="EH8-zt-M7U" id="CSg-MG-Slv"/>
+                        <outlet property="titleLabel" destination="o54-j6-lkT" id="yfM-bf-H50"/>
+                        <outlet property="workButton" destination="tOi-0D-vPC" id="FUd-di-PcC"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="219.69230769230771" y="344.79487179487182"/>
+        </scene>
+        <!--HomeViewController-->
+        <scene sceneID="Wxb-UN-wb9">
+            <objects>
+                <controller identifier="HomeViewController" id="MXf-8q-Dg0" customClass="HomeViewController" customModule="Travel_Time_WatchKit_Extension">
+                    <items>
+                        <label width="135" height="42" alignment="left" text="Travel time to Home:" numberOfLines="2" id="3qf-1z-Meu"/>
+                        <label alignment="left" text="Loading..." numberOfLines="6" id="mCH-z0-qgs"/>
+                    </items>
+                    <connections>
+                        <outlet property="timeLabel" destination="mCH-z0-qgs" id="O08-6A-5vA"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="446" y="344"/>
+        </scene>
+        <!--WorkViewController-->
+        <scene sceneID="jcs-US-r9d">
+            <objects>
+                <controller identifier="WorkViewController" id="EaN-Gp-sss" customClass="WorkViewController" customModule="Travel_Time_WatchKit_Extension">
+                    <items>
+                        <label width="135" height="42" alignment="left" text="Travel time to Work:" numberOfLines="2" id="jVB-l5-Y1r"/>
+                        <label alignment="left" text="Loading..." numberOfLines="6" id="zEc-Fx-DsW"/>
+                    </items>
+                    <connections>
+                        <outlet property="timeLabel" destination="zEc-Fx-DsW" id="Pm6-H3-sGi"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="669" y="344"/>
+        </scene>
+        <!--CustomViewController-->
+        <scene sceneID="SNs-Si-VBl">
+            <objects>
+                <controller identifier="CustomViewController" id="DZy-GR-4yu" customClass="CustomViewController" customModule="Travel_Time_WatchKit_Extension">
+                    <items>
+                        <label width="135" height="42" alignment="left" text="Travel time to Custom:" numberOfLines="2" id="Eic-FG-ADP"/>
+                        <label alignment="left" text="Loading..." numberOfLines="6" id="rZd-9f-cpc"/>
+                    </items>
+                    <connections>
+                        <outlet property="timeLabel" destination="rZd-9f-cpc" id="G5w-H2-JRf"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="890" y="350"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -31,7 +105,7 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Travel_Time_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
