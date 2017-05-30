@@ -67,6 +67,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate, WCS
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.requestLocation()
+        checkAddress()
     }
     
     override func didDeactivate() {
@@ -93,12 +94,30 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate, WCS
     }
     
     func allowInteraction() {
-        if ((UserDefaults.standard.value(forKey: "homeAddress")) != nil && (UserDefaults.standard.value(forKey: "workAddress")) != nil && (UserDefaults.standard.value(forKey: "customAddress")) != nil && locationSet == true) {
+        if (locationSet == true) {
         homeButton.setEnabled(true)
         workButton.setEnabled(true)
         customButton.setEnabled(true)
         WKInterfaceDevice.current().play(.click)
         titleLabel.setText("Select a Destination:")
+        }
+    }
+    
+    func checkAddress() {
+        if UserDefaults.standard.value(forKey: "homeAddress") == nil {
+            UserDefaults.standard.setValue([""], forKey: "homeAddress")
+        }
+        if UserDefaults.standard.value(forKey: "workAddress") == nil {
+            UserDefaults.standard.setValue([""], forKey: "workAddress")
+        }
+        if UserDefaults.standard.value(forKey: "custom1Address") == nil {
+            UserDefaults.standard.setValue([""], forKey: "custom1Address")
+        }
+        if UserDefaults.standard.value(forKey: "custom2Address") == nil {
+            UserDefaults.standard.setValue([""], forKey: "custom2Address")
+        }
+        if UserDefaults.standard.value(forKey: "custom3Address") == nil {
+            UserDefaults.standard.setValue([""], forKey: "custom3Address")
         }
     }
     
@@ -114,6 +133,7 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate, WCS
         }
         
     }
+    
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         sessionActive = true

@@ -11,12 +11,14 @@ import CoreLocation
 import WatchConnectivity
 
 class AddressSettingsViewController: UITableViewController, CLLocationManagerDelegate, WCSessionDelegate, UITextFieldDelegate {
+    
+    @IBOutlet var addressTable: UITableView!
 
     @IBOutlet weak var homeAddressField: UITextField!
-    @IBOutlet weak var workAddressField: UITextField!
-    @IBOutlet weak var customAddressField2: UITextField!
     @IBOutlet weak var customAddressField3: UITextField!
     @IBOutlet weak var customAddressField1: UITextField!
+    @IBOutlet weak var customAddressField2: UITextField!
+    @IBOutlet weak var workAddressField: UITextField!
     
     var locationManager: CLLocationManager = CLLocationManager()
     
@@ -31,6 +33,12 @@ class AddressSettingsViewController: UITableViewController, CLLocationManagerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadTextBoxes()
+        homeAddressField.delegate = self
+        workAddressField.delegate = self
+        customAddressField1.delegate = self
+        customAddressField2.delegate = self
+        customAddressField3.delegate = self
+        addressTable.allowsSelection = false
         //self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.requestWhenInUseAuthorization()

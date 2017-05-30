@@ -12,10 +12,53 @@ import CoreLocation
 
 class CustomViewController: WKInterfaceController, CLLocationManagerDelegate {
     
+
+    @IBAction func leftSwipe(_ sender: Any) {
+        if pageNum == 1 {
+            pageNum = 2
+            titleLabel.setText("Travel Time to Custom 2:")
+            dotsImage.setImageNamed("custom2")
+            timeLabel.setText("\nLoading...")
+            defaultsKey = "customAddress2"
+            getTime()
+        } else if pageNum == 2 {
+            pageNum = 3
+            titleLabel.setText("Travel Time to Custom 3:")
+            dotsImage.setImageNamed("custom3")
+            timeLabel.setText("\nLoading...")
+            defaultsKey = "customAddress3"
+            getTime()
+        } else {
+        }
+    }
+    
+    @IBAction func rightSwipe(_ sender: Any) {
+        if pageNum == 1 {
+        } else if pageNum == 2 {
+            pageNum = 1
+            titleLabel.setText("Travel Time to Custom 1:")
+            dotsImage.setImageNamed("custom1")
+            timeLabel.setText("\nLoading...")
+            defaultsKey = "customAddress1"
+            getTime()
+        } else {
+            pageNum = 2
+            titleLabel.setText("Travel Time to Custom 2:")
+            dotsImage.setImageNamed("custom2")
+            timeLabel.setText("\nLoading...")
+            defaultsKey = "customAddress2"
+            getTime()
+        }
+    }
+    
+    @IBOutlet var titleLabel: WKInterfaceLabel!
     @IBOutlet var timeLabel: WKInterfaceLabel!
+    @IBOutlet var dotsImage: WKInterfaceImage!
     
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation = CLLocation()
+    var pageNum = 1
+    var defaultsKey = "customAddress1"
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -39,7 +82,7 @@ class CustomViewController: WKInterfaceController, CLLocationManagerDelegate {
     }
     
     func getTime() {
-        let rawAddress = UserDefaults.standard.value(forKey: "customAddress1") as! String
+        let rawAddress = UserDefaults.standard.value(forKey: defaultsKey) as! String
         let formattedAddress = rawAddress.replacingOccurrences(of: " ", with: "+")
         let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=" + "\(currentLocation.coordinate.latitude)" + "," + "\(currentLocation.coordinate.longitude)" + "&destination=" + formattedAddress + "&key=AIzaSyCM1YKymuB5ePN5-uX0KOtPGgae5tYSW0w&alternatives=true&departure_time=now")
         var dict = Dictionary<String, Any>()

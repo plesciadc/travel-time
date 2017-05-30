@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     navigationBarAppearance.tintColor = UIColor.white
     navigationBarAppearance.barTintColor = UIColor(red: 0.09, green: 0.93, blue: 0.345, alpha: 1)
     navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.systemFont(ofSize: 23)]
-    
     return true
   }
 

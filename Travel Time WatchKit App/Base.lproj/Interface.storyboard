@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -76,15 +76,57 @@
             <objects>
                 <controller identifier="CustomViewController" id="DZy-GR-4yu" customClass="CustomViewController" customModule="Travel_Time_WatchKit_Extension">
                     <items>
-                        <label width="135" height="42" alignment="left" text="Travel time to Custom:" numberOfLines="2" id="Eic-FG-ADP"/>
-                        <label alignment="left" text="Loading..." numberOfLines="6" id="rZd-9f-cpc"/>
+                        <label width="135" height="42" alignment="left" text="Travel time to Custom 1:" numberOfLines="2" id="Eic-FG-ADP">
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="K3L-IQ-kFf">
+                                    <connections>
+                                        <action selector="rightSwipe:" destination="DZy-GR-4yu" id="LWm-HF-qNo"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="V6e-Br-Zqo">
+                                    <connections>
+                                        <action selector="leftSwipe:" destination="DZy-GR-4yu" id="MR0-HA-dvr"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                        </label>
+                        <label alignment="left" text="Loading..." numberOfLines="6" id="rZd-9f-cpc">
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="bVb-zZ-ueh">
+                                    <connections>
+                                        <action selector="rightSwipe:" destination="DZy-GR-4yu" id="83N-ve-3W2"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="c1f-Xx-Y9a">
+                                    <connections>
+                                        <action selector="leftSwipe:" destination="DZy-GR-4yu" id="Ys0-OA-QuD"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                        </label>
+                        <imageView width="99" height="28" alignment="center" verticalAlignment="bottom" image="custom1" id="kBx-n1-bhe">
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="MxL-PC-IfC">
+                                    <connections>
+                                        <action selector="rightSwipe:" destination="DZy-GR-4yu" id="mvE-Sx-hyD"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="Wlv-aO-Kqd">
+                                    <connections>
+                                        <action selector="leftSwipe:" destination="DZy-GR-4yu" id="zGT-uN-0kp"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                        </imageView>
                     </items>
                     <connections>
+                        <outlet property="dotsImage" destination="kBx-n1-bhe" id="Wjl-vT-Zyh"/>
                         <outlet property="timeLabel" destination="rZd-9f-cpc" id="G5w-H2-JRf"/>
+                        <outlet property="titleLabel" destination="Eic-FG-ADP" id="VLV-Sc-FTe"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="890" y="350"/>
+            <point key="canvasLocation" x="905" y="344"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
