@@ -124,6 +124,9 @@
                                     <segment title="Miles"/>
                                     <segment title="Kilometers"/>
                                 </segments>
+                                <connections>
+                                    <action selector="switchChanged:" destination="2Um-n5-mNn" eventType="valueChanged" id="FjF-mY-RMJ"/>
+                                </connections>
                             </segmentedControl>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slB-Xi-ibc">
                                 <rect key="frame" x="13" y="76" width="346" height="33"/>
@@ -167,6 +170,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="tK7-1d-Ojj"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="jc8-ry-jhJ" id="nog-x5-UHv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFw-dd-aZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

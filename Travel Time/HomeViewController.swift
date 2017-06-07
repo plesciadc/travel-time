@@ -119,9 +119,16 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
     
     func getTime() {
         let addressArray = UserDefaults.standard.value(forKey: "homeAddress") as! Array<String>
+        var distanceUnits = ""
+        if UserDefaults.standard.string(forKey: "distanceUnits") != nil {
+        distanceUnits = UserDefaults.standard.string(forKey: "distanceUnits")!
+        }
+        else {
+            distanceUnits = "imperial"
+        }
         let rawAddress = addressArray[0]
         let formattedAddress = rawAddress.replacingOccurrences(of: " ", with: "+")
-        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=" + "\(currentLocation.coordinate.latitude)" + "," + "\(currentLocation.coordinate.longitude)" + "&destination=" + formattedAddress + "&key=AIzaSyCM1YKymuB5ePN5-uX0KOtPGgae5tYSW0w&alternatives=true&departure_time=now")
+        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=" + "\(currentLocation.coordinate.latitude)" + "," + "\(currentLocation.coordinate.longitude)" + "&destination=" + formattedAddress + "&key=AIzaSyCM1YKymuB5ePN5-uX0KOtPGgae5tYSW0w&alternatives=true&departure_time=now&units=" + distanceUnits)
         var dict = Dictionary<String, Any>()
         var newDict = NSArray()
         var finalArray = NSDictionary()

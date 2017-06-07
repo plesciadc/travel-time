@@ -17,9 +17,16 @@ class SettingsViewController: BaseViewController, CLLocationManagerDelegate, WCS
     var session: WCSession?
     var isActive = false
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addSlideMenuButton()
+        if UserDefaults.standard.string(forKey: "distanceUnits") == "imperial" {
+            segmentedControl.selectedSegmentIndex = 0
+        } else {
+            segmentedControl.selectedSegmentIndex = 1
+        }
         //self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.requestWhenInUseAuthorization()
@@ -41,6 +48,13 @@ class SettingsViewController: BaseViewController, CLLocationManagerDelegate, WCS
         }
     }
     
+    @IBAction func switchChanged(_ sender: Any) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            UserDefaults.standard.setValue("imperial", forKey: "distanceUnits")
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            UserDefaults.standard.setValue("metric", forKey: "distanceUnits")
+        }
+    }
 
     func sendToWatch() {
         
