@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     navigationBarAppearance.tintColor = UIColor.white
     navigationBarAppearance.barTintColor = UIColor(red: 0.09, green: 0.93, blue: 0.345, alpha: 1)
     navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.systemFont(ofSize: 23)]
+    fillUserDefaults()
     return true
   }
 
@@ -48,6 +49,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
 
+    func fillUserDefaults() {
+        if UserDefaults.standard.value(forKey: "homeAddress") == nil {
+            UserDefaults.standard.setValue([""], forKey: "homeAddress")
+        }
+        if UserDefaults.standard.value(forKey: "workAddress") == nil {
+            UserDefaults.standard.setValue([""], forKey: "workAddress")
+        }
+        if UserDefaults.standard.value(forKey: "custom1Address") == nil {
+            UserDefaults.standard.setValue([""], forKey: "custom1Address")
+        }
+        if UserDefaults.standard.value(forKey: "custom2Address") == nil {
+            UserDefaults.standard.setValue([""], forKey: "custom2Address")
+        }
+        if UserDefaults.standard.value(forKey: "custom3Address") == nil {
+            UserDefaults.standard.setValue([""], forKey: "custom3Address")
+        }
+        if UserDefaults.standard.value(forKey: "distanceUnits") == nil {
+            UserDefaults.standard.setValue("imperial", forKey: "distanceUnits")
+        }
+    }
 
 }
 

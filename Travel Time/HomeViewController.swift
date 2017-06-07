@@ -101,11 +101,12 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
         isActive = true
     }
     
-    func updateUI() {
+    func updateUI(success: Bool) {
         self.spinner.stopAnimating()
         self.greyBG.isHidden = true
         self.homeView.isUserInteractionEnabled = true
         self.mapView.showsUserLocation = true
+        if success == true {
         let mapSpan = MKCoordinateSpanMake((deltaLat + 0.005), (deltaLong + 0.005))
         let centerCoordinate = CLLocationCoordinate2DMake(centerLat, centerLong)
         let coordinateRegion = MKCoordinateRegionMake(centerCoordinate, mapSpan)
@@ -114,6 +115,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
         self.mapView.addAnnotation(startingPoint)
         self.mapView.addAnnotation(endingPoint)
         self.mapView.setRegion(coordinateRegion, animated: true)
+        }
         
     }
     
@@ -148,7 +150,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
                 print(error)
                 DispatchQueue.main.async {
                 self.directionsLabel.text = "No Routes Found.\nPlease Check Your Connection."
-                self.updateUI()
+                self.updateUI(success: false)
                 }
                 return
             }
@@ -156,7 +158,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
                 print("Data is empty")
                 DispatchQueue.main.async {
                 self.directionsLabel.text = "No Routes Found.\nAddress Format Incorrect."
-                self.updateUI()
+                self.updateUI(success: false)
                 }
                 return
             }
@@ -164,6 +166,8 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
             let json = try! JSONSerialization.jsonObject(with: data, options: [])
             dict = json as! Dictionary
             newDict = dict["routes"] as! NSArray
+            
+            if newDict.count > 0 {
             // Set bounds
             let boundsDict = newDict[0] as! NSDictionary
             let bounds = boundsDict["bounds"] as! NSDictionary
@@ -184,12 +188,13 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
             let endingLat = endingDest["lat"] as! Double
             let endingLong = endingDest["lng"] as! Double
             self.endLocation = CLLocationCoordinate2DMake(endingLat, endingLong)
+            }
             
             // Check for errors
             if newDict.count < 1 {
                 DispatchQueue.main.async {
                     self.directionsLabel.text = "No Routes Found.\nAddress Format Incorrect."
-                    self.updateUI()
+                    self.updateUI(success: false)
                 }
             }
             else {
@@ -216,7 +221,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
                 }
                 DispatchQueue.main.async {
                 self.directionsLabel.text = summaryText
-                self.updateUI()
+                self.updateUI(success: true)
                 }
             }
         }
