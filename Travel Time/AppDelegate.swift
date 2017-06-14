@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     navigationBarAppearance.barTintColor = UIColor(red: 0.09, green: 0.93, blue: 0.345, alpha: 1)
     navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.systemFont(ofSize: 23)]
     fillUserDefaults()
+    
     return true
   }
 
@@ -48,6 +49,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler:
+        @escaping (Bool) -> Void) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var vc = UIViewController()
+        if shortcutItem.type == "com.danielplescia.traveltime.Travel-Time.Home" {
+            vc = storyboard.instantiateViewController(withIdentifier: "HomeNC")
+        } else if shortcutItem.type == "com.danielplescia.traveltime.Travel-Time.Work" {
+            vc = storyboard.instantiateViewController(withIdentifier: "WorkNC")
+        }
+        else {
+            vc = storyboard.instantiateViewController(withIdentifier: "CustomNC")
+        }
+        window?.rootViewController?.present(vc, animated: false, completion: nil)
+    }
 
     func fillUserDefaults() {
         if UserDefaults.standard.value(forKey: "homeAddress") == nil {
