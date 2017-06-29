@@ -104,19 +104,19 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate, WCS
     
     func checkAddress() {
         if UserDefaults.standard.value(forKey: "homeAddress") == nil {
-            UserDefaults.standard.setValue([""], forKey: "homeAddress")
+            UserDefaults.standard.setValue("", forKey: "homeAddress")
         }
         if UserDefaults.standard.value(forKey: "workAddress") == nil {
-            UserDefaults.standard.setValue([""], forKey: "workAddress")
+            UserDefaults.standard.setValue("", forKey: "workAddress")
         }
         if UserDefaults.standard.value(forKey: "customAddress1") == nil {
-            UserDefaults.standard.setValue([""], forKey: "customAddress1")
+            UserDefaults.standard.setValue("", forKey: "customAddress1")
         }
         if UserDefaults.standard.value(forKey: "customAddress2") == nil {
-            UserDefaults.standard.setValue([""], forKey: "customAddress2")
+            UserDefaults.standard.setValue("", forKey: "customAddress2")
         }
         if UserDefaults.standard.value(forKey: "customAddress3") == nil {
-            UserDefaults.standard.setValue([""], forKey: "customAddress3")
+            UserDefaults.standard.setValue("", forKey: "customAddress3")
         }
     }
     

@@ -81,9 +81,8 @@ class CustomViewController: WKInterfaceController, CLLocationManagerDelegate {
     }
     
     func getTime() {
-        let rawAddress = UserDefaults.standard.value(forKey: defaultsKey) as! Array<String>
-        let rawString = rawAddress[0]
-        let formattedAddress = rawString.replacingOccurrences(of: " ", with: "+")
+        let rawAddress = UserDefaults.standard.value(forKey: defaultsKey) as! String
+        let formattedAddress = rawAddress.replacingOccurrences(of: " ", with: "+")
         let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=" + "\(currentLocation.coordinate.latitude)" + "," + "\(currentLocation.coordinate.longitude)" + "&destination=" + formattedAddress + "&key=AIzaSyCM1YKymuB5ePN5-uX0KOtPGgae5tYSW0w&alternatives=true&departure_time=now")
         var dict = Dictionary<String, Any>()
         var newDict = NSArray()

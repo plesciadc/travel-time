@@ -21,6 +21,7 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     var centerLat = Double()
     var centerLong = Double()
     var endLocation = CLLocationCoordinate2D()
+    var globalAddress = ""
     
     var homeAddress = [""]
     var workAddress = [""]
@@ -56,6 +57,15 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
         mapView.removeAnnotations(mapView.annotations)
         getTime()
     }
+    
+    @IBAction func userTapped(_ sender: Any) {
+        let fixCommas = globalAddress.replacingOccurrences(of: ",+", with: "+")
+        let formattedAddress = fixCommas.replacingOccurrences(of: "+,", with: "+")
+        let finalAddress = formattedAddress.replacingOccurrences(of: ",", with: "+")
+        let url = URL(string: "https://www.google.com/maps/dir/?api=1&origin=" + "\(currentLocation.coordinate.latitude)" + "%2C" + "\(currentLocation.coordinate.longitude)" + "&destination=" + finalAddress)
+        UIApplication.shared.openURL(url!)
+    }
+
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var directionsLabel: UILabel!
@@ -132,6 +142,7 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
         }
         let rawAddress = addressArray[0]
         let formattedAddress = rawAddress.replacingOccurrences(of: " ", with: "+")
+        globalAddress = formattedAddress
         let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=" + "\(currentLocation.coordinate.latitude)" + "," + "\(currentLocation.coordinate.longitude)" + "&destination=" + formattedAddress + "&key=AIzaSyCM1YKymuB5ePN5-uX0KOtPGgae5tYSW0w&alternatives=true&departure_time=now&units=" + distanceUnits)
         var dict = Dictionary<String, Any>()
         var newDict = NSArray()
