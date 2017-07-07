@@ -72,6 +72,7 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
         self.mapView.showsUserLocation = false
         self.addSlideMenuButton()
         self.addMapsMenuButton()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         mapView.isUserInteractionEnabled = false
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
@@ -109,6 +110,7 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
         self.greyBG.isHidden = true
         self.mapView.isUserInteractionEnabled = true
         self.mapView.showsUserLocation = true
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
         if success == true {
             let mapSpan = MKCoordinateSpanMake((deltaLat + 0.012), (deltaLong + 0.012))
             let centerCoordinate = CLLocationCoordinate2DMake(centerLat, centerLong)
