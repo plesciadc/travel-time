@@ -41,9 +41,6 @@
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fxd-sf-GbY">
                                 <rect key="frame" x="0.0" y="205" width="375" height="461"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="EaH-P2-ZHG" appends="YES" id="Qbo-GB-hn1"/>
-                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deJ-vc-kLV">
                                 <rect key="frame" x="0.0" y="205" width="375" height="1"/>
@@ -51,9 +48,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HcJ-7b-GYi"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="EaH-P2-ZHG" appends="YES" id="diD-Ka-UAq"/>
-                                </connections>
                             </view>
                             <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t0B-qE-dSv">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -110,11 +104,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="EaH-P2-ZHG">
-                    <connections>
-                        <action selector="userTapped:" destination="BYZ-38-t0r" id="GDs-Bh-kWu"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="989.60000000000002" y="37.331334332833585"/>
         </scene>
@@ -552,9 +541,6 @@
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U3q-XT-FHf">
                                 <rect key="frame" x="0.0" y="205" width="375" height="461"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Mm3-2N-46T" appends="YES" id="rKQ-aL-lbY"/>
-                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03T-rc-8yW">
                                 <rect key="frame" x="0.0" y="205" width="375" height="1"/>
@@ -562,9 +548,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="TXf-Lz-z16"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Mm3-2N-46T" appends="YES" id="Jcg-Yy-Zua"/>
-                                </connections>
                             </view>
                             <view alpha="0.44999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OU5-i2-6u8">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -621,11 +604,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZi-nL-dPf" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Mm3-2N-46T">
-                    <connections>
-                        <action selector="userTapped:" destination="pGr-N5-EEA" id="x1F-9D-oJU"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2646" y="37"/>
         </scene>
@@ -676,9 +654,6 @@
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JgT-Qv-14p">
                                 <rect key="frame" x="0.0" y="205" width="375" height="435"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="0io-ga-UbC" appends="YES" id="Rhe-61-dRm"/>
-                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWS-rq-7nc">
                                 <rect key="frame" x="0.0" y="205" width="375" height="1"/>
@@ -686,9 +661,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="okZ-H8-wm6"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="0io-ga-UbC" appends="YES" id="AcU-yh-ZhP"/>
-                                </connections>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="We0-LE-wqv">
                                 <rect key="frame" x="168" y="635" width="39" height="37"/>
@@ -768,11 +740,6 @@
                         <action selector="swipeRight:" destination="0Ka-wl-hXZ" id="mWJ-lI-e29"/>
                     </connections>
                 </swipeGestureRecognizer>
-                <tapGestureRecognizer id="0io-ga-UbC">
-                    <connections>
-                        <action selector="userTapped:" destination="0Ka-wl-hXZ" id="N7I-Sg-FQe"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2645.5999999999999" y="714.69265367316348"/>
         </scene>

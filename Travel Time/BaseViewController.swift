@@ -73,6 +73,16 @@ class BaseViewController: UIViewController, SlideMenuDelegate {
         let customBarItem = UIBarButtonItem(customView: btnShowMenu)
         self.navigationItem.leftBarButtonItem = customBarItem;
     }
+    
+    func addMapsMenuButton(){
+        let btnShowMaps = UIButton(type: UIButtonType.system)
+        btnShowMaps.setTitle("Open in Maps", for: UIControlState())
+        btnShowMaps.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        btnShowMaps.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        btnShowMaps.addTarget(self, action: #selector(BaseViewController.onMapsButtonPressed(_:)), for: UIControlEvents.touchUpInside)
+        let customBarItem = UIBarButtonItem(customView: btnShowMaps)
+        self.navigationItem.rightBarButtonItem = customBarItem;
+    }
 
     func defaultMenuImage() -> UIImage {
         var defaultMenuImage = UIImage()
@@ -94,6 +104,14 @@ class BaseViewController: UIViewController, SlideMenuDelegate {
         UIGraphicsEndImageContext()
        
         return defaultMenuImage;
+    }
+    
+    func onMapsButtonPressed(_ sender : UIButton) {
+        let fixCommas = globalAddress.replacingOccurrences(of: ",+", with: "+")
+        let formattedAddress = fixCommas.replacingOccurrences(of: "+,", with: "+")
+        let finalAddress = formattedAddress.replacingOccurrences(of: ",", with: "+")
+        let url = URL(string: "http://maps.apple.com/?daddr=" + finalAddress + "&dirflg=d")
+        UIApplication.shared.openURL(url!)
     }
     
     func onSlideMenuButtonPressed(_ sender : UIButton){

@@ -11,6 +11,8 @@ import CoreLocation
 import WatchConnectivity
 import MapKit
 
+var globalAddress = ""
+
 class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     var locationManager: CLLocationManager = CLLocationManager()
@@ -21,20 +23,11 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
     var centerLat = Double()
     var centerLong = Double()
     var endLocation = CLLocationCoordinate2D()
-    var globalAddress = ""
     
     var homeAddress = [""]
     var workAddress = [""]
     var customAddress = [""]
     var isActive = false
-    
-    @IBAction func userTapped(_ sender: Any) {
-        let fixCommas = globalAddress.replacingOccurrences(of: ",+", with: "+")
-        let formattedAddress = fixCommas.replacingOccurrences(of: "+,", with: "+")
-        let finalAddress = formattedAddress.replacingOccurrences(of: ",", with: "+")
-        let url = URL(string: "https://www.google.com/maps/dir/?api=1&origin=" + "\(currentLocation.coordinate.latitude)" + "%2C" + "\(currentLocation.coordinate.longitude)" + "&destination=" + finalAddress)
-        UIApplication.shared.openURL(url!)
-    }
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var directionsLabel: UILabel!
@@ -48,6 +41,8 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
         mapView.delegate = self
         self.mapView.showsUserLocation = false
         self.addSlideMenuButton()
+        self.addMapsMenuButton()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         mapView.isUserInteractionEnabled = false
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
@@ -85,6 +80,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
         self.greyBG.isHidden = true
         self.mapView.isUserInteractionEnabled = true
         self.mapView.showsUserLocation = true
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
         if success == true {
         let mapSpan = MKCoordinateSpanMake((deltaLat + 0.012), (deltaLong + 0.012))
         let centerCoordinate = CLLocationCoordinate2DMake(centerLat, centerLong)

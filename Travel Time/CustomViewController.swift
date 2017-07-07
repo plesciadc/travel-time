@@ -21,7 +21,6 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
     var centerLat = Double()
     var centerLong = Double()
     var endLocation = CLLocationCoordinate2D()
-    var globalAddress = ""
     
     var homeAddress = [""]
     var workAddress = [""]
@@ -57,16 +56,7 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
         mapView.removeAnnotations(mapView.annotations)
         getTime()
     }
-    
-    @IBAction func userTapped(_ sender: Any) {
-        let fixCommas = globalAddress.replacingOccurrences(of: ",+", with: "+")
-        let formattedAddress = fixCommas.replacingOccurrences(of: "+,", with: "+")
-        let finalAddress = formattedAddress.replacingOccurrences(of: ",", with: "+")
-        let url = URL(string: "https://www.google.com/maps/dir/?api=1&origin=" + "\(currentLocation.coordinate.latitude)" + "%2C" + "\(currentLocation.coordinate.longitude)" + "&destination=" + finalAddress)
-        UIApplication.shared.openURL(url!)
-    }
 
-    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var directionsLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -81,6 +71,7 @@ class CustomViewController: BaseViewController, CLLocationManagerDelegate, MKMap
         mapView.delegate = self
         self.mapView.showsUserLocation = false
         self.addSlideMenuButton()
+        self.addMapsMenuButton()
         mapView.isUserInteractionEnabled = false
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
