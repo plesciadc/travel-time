@@ -65,7 +65,6 @@ class CustomViewController: WKInterfaceController, CLLocationManagerDelegate {
         // Configure interface objects here.
         if let newContext = context {
             currentLocation = newContext as! CLLocation
-            print("\(UserDefaults.standard.value(forKey: "customAddress1")!)")
         }
     }
     

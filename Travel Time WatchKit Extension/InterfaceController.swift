@@ -89,7 +89,6 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate, WCS
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
         print(error.localizedDescription)
     }
     
@@ -105,19 +104,19 @@ class InterfaceController: WKInterfaceController, CLLocationManagerDelegate, WCS
     
     func checkAddress() {
         if UserDefaults.standard.value(forKey: "homeAddress") == nil {
-            UserDefaults.standard.setValue([""], forKey: "homeAddress")
+            UserDefaults.standard.setValue("", forKey: "homeAddress")
         }
         if UserDefaults.standard.value(forKey: "workAddress") == nil {
-            UserDefaults.standard.setValue([""], forKey: "workAddress")
+            UserDefaults.standard.setValue("", forKey: "workAddress")
         }
-        if UserDefaults.standard.value(forKey: "custom1Address") == nil {
-            UserDefaults.standard.setValue([""], forKey: "custom1Address")
+        if UserDefaults.standard.value(forKey: "customAddress1") == nil {
+            UserDefaults.standard.setValue("", forKey: "customAddress1")
         }
-        if UserDefaults.standard.value(forKey: "custom2Address") == nil {
-            UserDefaults.standard.setValue([""], forKey: "custom2Address")
+        if UserDefaults.standard.value(forKey: "customAddress2") == nil {
+            UserDefaults.standard.setValue("", forKey: "customAddress2")
         }
-        if UserDefaults.standard.value(forKey: "custom3Address") == nil {
-            UserDefaults.standard.setValue([""], forKey: "custom3Address")
+        if UserDefaults.standard.value(forKey: "customAddress3") == nil {
+            UserDefaults.standard.setValue("", forKey: "customAddress3")
         }
     }
     

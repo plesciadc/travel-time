@@ -27,6 +27,8 @@
 		5D268C3E1E6B3691003074CA /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D268C3D1E6B3691003074CA /* CustomViewController.swift */; };
 		5D8EA1B81ECF6E75000C05F6 /* AddressSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8EA1B71ECF6E75000C05F6 /* AddressSettingsViewController.swift */; };
 		5D9F832C1E674E16005483DB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9F832B1E674E16005483DB /* CoreLocation.framework */; };
+		5DB7E4001EEC3CA200EDB4DA /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB7E3FF1EEC3CA200EDB4DA /* WorkViewController.swift */; };
+		5DB7E4021EEC3CAD00EDB4DA /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB7E4011EEC3CAD00EDB4DA /* CustomViewController.swift */; };
 		5DC7ABB81E6F169B00E20255 /* TravelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC7ABB71E6F169B00E20255 /* TravelData.swift */; };
 		5DF3B6521ECE1C670074C62B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF3B6511ECE1C670074C62B /* SettingsViewController.swift */; };
 		5DF99C951ECE0C8F00B4722B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF99C931ECE0C8F00B4722B /* BaseViewController.swift */; };
@@ -101,6 +103,8 @@
 		5D268C3D1E6B3691003074CA /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		5D8EA1B71ECF6E75000C05F6 /* AddressSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSettingsViewController.swift; sourceTree = "<group>"; };
 		5D9F832B1E674E16005483DB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5DB7E3FF1EEC3CA200EDB4DA /* WorkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
+		5DB7E4011EEC3CAD00EDB4DA /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		5DC7ABB71E6F169B00E20255 /* TravelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelData.swift; sourceTree = "<group>"; };
 		5DF3B6511ECE1C670074C62B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5DF99C931ECE0C8F00B4722B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 			children = (
 				5D035EAF1E6600A000D38202 /* AppDelegate.swift */,
 				5D035EB11E6600A000D38202 /* HomeViewController.swift */,
+				5DB7E3FF1EEC3CA200EDB4DA /* WorkViewController.swift */,
+				5DB7E4011EEC3CAD00EDB4DA /* CustomViewController.swift */,
 				5DF3B6511ECE1C670074C62B /* SettingsViewController.swift */,
 				5D8EA1B71ECF6E75000C05F6 /* AddressSettingsViewController.swift */,
 				5DF99C931ECE0C8F00B4722B /* BaseViewController.swift */,
@@ -366,11 +372,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DB7E4021EEC3CAD00EDB4DA /* CustomViewController.swift in Sources */,
 				5D035EB21E6600A000D38202 /* HomeViewController.swift in Sources */,
 				5D8EA1B81ECF6E75000C05F6 /* AddressSettingsViewController.swift in Sources */,
 				5D035EB01E6600A000D38202 /* AppDelegate.swift in Sources */,
 				5D19FB5A1ED70B400001D1C4 /* Pins.swift in Sources */,
 				5DF99C951ECE0C8F00B4722B /* BaseViewController.swift in Sources */,
+				5DB7E4001EEC3CA200EDB4DA /* WorkViewController.swift in Sources */,
 				5DF3B6521ECE1C670074C62B /* SettingsViewController.swift in Sources */,
 				5DF99C961ECE0C8F00B4722B /* MenuViewController.swift in Sources */,
 			);
@@ -603,6 +611,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KM77S9HEXJ;
 				INFOPLIST_FILE = "Travel Time/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielplescia.traveltime.Travel-Time";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -618,6 +627,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KM77S9HEXJ;
 				INFOPLIST_FILE = "Travel Time/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielplescia.traveltime.Travel-Time";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -11,7 +11,9 @@ import CoreLocation
 import WatchConnectivity
 import MapKit
 
-class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessionDelegate, MKMapViewDelegate {
+var globalAddress = ""
+
+class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation = CLLocation()
@@ -22,14 +24,16 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
     var centerLong = Double()
     var endLocation = CLLocationCoordinate2D()
     
+    var timer = Timer()
+    var timerRunning = false
+    
     var homeAddress = [""]
     var workAddress = [""]
     var customAddress = [""]
-    var session: WCSession?
     var isActive = false
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var directionsLabel: UILabel!
+    @IBOutlet weak var directionsLabel: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var greyBG: UIView!
@@ -40,12 +44,13 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
         mapView.delegate = self
         self.mapView.showsUserLocation = false
         self.addSlideMenuButton()
-        homeView.isUserInteractionEnabled = false
+        self.addMapsMenuButton()
+        self.convertAddress()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        mapView.isUserInteractionEnabled = false
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        startSession()
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,24 +58,19 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
         // Dispose of any resources that can be recreated.
     }
     
-    func startSession() {
-        if WCSession.isSupported() {
-            
-            session = WCSession.default()
-            session?.delegate = self
-            session?.activate()
-            
-        }
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        currentLocation = locations[0]
-        if gotInitialLocation == false {
-        getTime()
-        gotInitialLocation = true
+        if locations[0].coordinate.latitude != currentLocation.coordinate.latitude {
+            currentLocation = locations[0]
+            getTime()
+            if gotInitialLocation == false {
+                mapView.setCenter(currentLocation.coordinate, animated: true)
+                gotInitialLocation = true
+            }
+        } else {
+            if timerRunning == false {
+            runTimer()
+            }
         }
-        mapView.setCenter(currentLocation.coordinate, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -78,155 +78,156 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, WCSessi
             self.directionsLabel.text = "Unable to Get Your Location.\nPlease Check Your Connection."
             self.spinner.stopAnimating()
             self.greyBG.isHidden = true
-            self.homeView.isUserInteractionEnabled = true
+            self.mapView.isUserInteractionEnabled = true
         }
         print(error.localizedDescription)
     }
     
-    func sendToWatch() {
-            let applicationDict = ["homeAddress": homeAddress, "workAddress": workAddress, "customAddress": customAddress]
-            session?.transferUserInfo(applicationDict)
-    }
-    
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        print("Is Inactive")
-        isActive = false
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        WCSession.default().activate()
-    }
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        isActive = true
+    func convertAddress() {
+        let addressArray = UserDefaults.standard.value(forKey: "homeAddress") as! Array<String>
+        let rawAddress = addressArray[0]
+        globalAddress = rawAddress
+
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(rawAddress) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let destinationPlacemark = placemarks.first?.location
+                else {
+                    // handle no location found
+                    return
+            }
+            
+            self.endLocation = destinationPlacemark.coordinate
+            self.locationManager.requestLocation()
+        }
     }
     
     func updateUI(success: Bool) {
         self.spinner.stopAnimating()
         self.greyBG.isHidden = true
-        self.homeView.isUserInteractionEnabled = true
+        self.mapView.isUserInteractionEnabled = true
         self.mapView.showsUserLocation = true
-        if success == true {
-        let mapSpan = MKCoordinateSpanMake((deltaLat + 0.005), (deltaLong + 0.005))
-        let centerCoordinate = CLLocationCoordinate2DMake(centerLat, centerLong)
-        let coordinateRegion = MKCoordinateRegionMake(centerCoordinate, mapSpan)
-        let startingPoint = Pins(title: "Starting Location", coordinate: currentLocation.coordinate)
-        let endingPoint = Pins(title: "Ending Location", coordinate: endLocation)
-        self.mapView.addAnnotation(startingPoint)
-        self.mapView.addAnnotation(endingPoint)
-        self.mapView.setRegion(coordinateRegion, animated: true)
-        }
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    // New method for refreshing location every X seconds
+    func startRefresh() {
+        timerRunning = false
+        locationManager.requestLocation()
         
+    }
+    // Method to run timer. Time interval to be replaced with user choice for updating
+    func runTimer() {
+        timerRunning = true
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self,   selector: (#selector(self.startRefresh)), userInfo: nil, repeats: false)
     }
     
+    
     func getTime() {
-        let addressArray = UserDefaults.standard.value(forKey: "homeAddress") as! Array<String>
-        var distanceUnits = ""
-        if UserDefaults.standard.string(forKey: "distanceUnits") != nil {
-        distanceUnits = UserDefaults.standard.string(forKey: "distanceUnits")!
-        }
-        else {
-            distanceUnits = "imperial"
-        }
-        let rawAddress = addressArray[0]
-        let formattedAddress = rawAddress.replacingOccurrences(of: " ", with: "+")
-        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=" + "\(currentLocation.coordinate.latitude)" + "," + "\(currentLocation.coordinate.longitude)" + "&destination=" + formattedAddress + "&key=AIzaSyCM1YKymuB5ePN5-uX0KOtPGgae5tYSW0w&alternatives=true&departure_time=now&units=" + distanceUnits)
-        var dict = Dictionary<String, Any>()
-        var newDict = NSArray()
-        var finalArray = NSDictionary()
-        var legs = NSArray()
-        var legs2 = NSDictionary()
-        var duration = NSDictionary()
-        var distanceDict = NSDictionary()
-        var distance = ""
-        var time = ""
-        var roads = ""
-        var summaries:Array<String> = []
-        var roadsList:Array<String> = []
         var summaryText = ""
+        var count = 0
+        var distance = 0.0
         
-        let task = URLSession.shared.dataTask(with: url!) { data, response, error in
-            guard error == nil else {
-                print(error)
-                DispatchQueue.main.async {
-                self.directionsLabel.text = "No Routes Found.\nPlease Check Your Connection."
-                self.updateUI(success: false)
-                }
-                return
-            }
-            guard let data = data else {
-                print("Data is empty")
-                DispatchQueue.main.async {
-                self.directionsLabel.text = "No Routes Found.\nAddress Format Incorrect."
-                self.updateUI(success: false)
-                }
-                return
-            }
-            
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            dict = json as! Dictionary
-            newDict = dict["routes"] as! NSArray
-            
-            if newDict.count > 0 {
-            // Set bounds
-            let boundsDict = newDict[0] as! NSDictionary
-            let bounds = boundsDict["bounds"] as! NSDictionary
-            let northeast = bounds["northeast"] as! NSDictionary
-            let southwest = bounds["southwest"] as! NSDictionary
-            let boundsNorthLat = northeast["lat"] as! Double
-            let boundsNorthLong = northeast["lng"] as! Double
-            let boundsSouthLat = southwest["lat"] as! Double
-            let boundsSouthLong = southwest["lng"] as! Double
-            self.deltaLat = abs(boundsNorthLat - boundsSouthLat)
-            self.deltaLong = abs(boundsNorthLong - boundsSouthLong)
-            self.centerLat = (boundsNorthLat + boundsSouthLat)/2
-            self.centerLong = (boundsNorthLong + boundsSouthLong)/2
-            // Set Ending Point
-            let legsArray = boundsDict["legs"] as! NSArray
-            let finalLegs = legsArray[0] as! NSDictionary
-            let endingDest = finalLegs["end_location"] as! NSDictionary
-            let endingLat = endingDest["lat"] as! Double
-            let endingLong = endingDest["lng"] as! Double
-            self.endLocation = CLLocationCoordinate2DMake(endingLat, endingLong)
-            }
-            
-            // Check for errors
-            if newDict.count < 1 {
-                DispatchQueue.main.async {
-                    self.directionsLabel.text = "No Routes Found.\nAddress Format Incorrect."
-                    self.updateUI(success: false)
-                }
-            }
-            else {
-                
-                for i in 0...newDict.count - 1
-                {
-                    finalArray = newDict[i] as! NSDictionary
-                    legs = finalArray["legs"] as! NSArray
-                    legs2 = legs[0] as! NSDictionary
-                    duration = legs2["duration_in_traffic"] as! NSDictionary
-                    distanceDict = legs2["distance"] as! NSDictionary
-                    distance = distanceDict["text"] as! String
-                    time = duration["text"] as! String
-                    roads = finalArray["summary"] as! String
-                    summaries.append(time + " via " + roads + " (" + distance + ")")
-                    if !(roadsList.contains(roads)) {
-                        roadsList.append(roads)
-                        if (i > 0) {
-                            summaryText.append("\n" + summaries[i])
-                        }else {
-                            summaryText.append(summaries[i])
-                        }
-                    }
-                }
-                DispatchQueue.main.async {
-                self.directionsLabel.text = summaryText
-                self.updateUI(success: true)
-                }
-            }
+        let units = getUnits()
+        
+        let sourceLocation = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
+        let destinationPlacemark = MKPlacemark(coordinate: endLocation, addressDictionary: nil)
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.title = "Ending Location"
+        if let location = destinationPlacemark.location {
+            destinationAnnotation.coordinate = location.coordinate
         }
         
-        task.resume()
-    }
+        self.mapView.showAnnotations([destinationAnnotation], animated: true )
 
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .automobile
+        directionRequest.requestsAlternateRoutes = true
+        
+        // Calculate the direction
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate {
+            (response, error) -> Void in
+            
+            guard let response = response else {
+                if let error = error {
+                    print("Error: \(error)")
+                }
+                
+                return
+            }
+            for route in response.routes {
+                count += 1
+                self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+                if self.getUnits() == "miles" {
+                    distance = route.distance / 1609.34
+                } else {
+                    distance = route.distance / 1000
+                }
+                var routeTime = ""
+                if route.expectedTravelTime >= 4800 {
+                routeTime = self.stringFromTimeInterval(interval: route.expectedTravelTime)
+                } else {
+                    let expectedTime = NSInteger(route.expectedTravelTime / 60)
+                    routeTime = "\(expectedTime) minutes"
+                }
+                if count < response.routes.count {
+                    summaryText.append("\(routeTime) via \(route.name) (\(distance.truncate(places: 1)) \(units))\n")
+                } else {
+                    summaryText.append("\(routeTime) via \(route.name) (\(distance.truncate(places: 1)) \(units))")
+                }
+            }
+            
+            let rect = response.routes[0].polyline.boundingMapRect
+            let bound = self.mapView.mapRectThatFits(rect, edgePadding: UIEdgeInsetsMake(90, 35, 35, 50))
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(bound), animated: false)
+            
+            self.directionsLabel.text = summaryText
+            self.updateUI(success: true)
+            if self.timerRunning == false {
+            self.runTimer()
+            }
+        }
+    }
+    
+    func getUnits() -> String {
+        if UserDefaults.standard.string(forKey: "distanceUnits") == "imperial" {
+            return "miles"
+        } else {
+            return "km"
+        }
+    }
+    
+    func stringFromTimeInterval(interval: TimeInterval) -> String {
+        
+        let ti = NSInteger(interval)
+        
+        let minutes = (ti / 60) % 60
+        let hours = (ti / 3600)
+        
+        return String(format: "%0.2d hours %0.2d minutes",hours,minutes)
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 3.0
+        
+        return renderer
+    }
+}
+
+extension Double
+{
+    func truncate(places : Int)-> Double
+    {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
+    }
 }
