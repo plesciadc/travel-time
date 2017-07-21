@@ -36,10 +36,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fxd-sf-GbY">
                                 <rect key="frame" x="0.0" y="205" width="375" height="461"/>
                             </mapView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Loading..." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gg3-s9-Sam">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Loading..." textAlignment="natural" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gg3-s9-Sam">
                                 <rect key="frame" x="12" y="113" width="347" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deJ-vc-kLV">
@@ -73,13 +72,17 @@
                             <constraint firstAttribute="bottomMargin" secondItem="t0B-qE-dSv" secondAttribute="bottom" id="FV0-Ji-f30"/>
                             <constraint firstItem="t0B-qE-dSv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HYh-X7-xt0"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="t0B-qE-dSv" secondAttribute="bottom" id="J1K-R2-kxc"/>
+                            <constraint firstItem="Gg3-s9-Sam" firstAttribute="top" secondItem="t0B-qE-dSv" secondAttribute="top" constant="49" id="Lll-XH-feP"/>
                             <constraint firstAttribute="trailing" secondItem="t0B-qE-dSv" secondAttribute="trailing" id="Uwb-xB-fbh"/>
+                            <constraint firstItem="Gg3-s9-Sam" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="VdB-oo-qwz"/>
+                            <constraint firstItem="deJ-vc-kLV" firstAttribute="top" secondItem="Gg3-s9-Sam" secondAttribute="bottom" constant="9" id="YYU-EJ-Ozl"/>
                             <constraint firstItem="Fxd-sf-GbY" firstAttribute="top" secondItem="xbw-jq-MjY" secondAttribute="bottom" constant="79" id="YrD-E3-rIV"/>
                             <constraint firstItem="Fxd-sf-GbY" firstAttribute="trailing" secondItem="deJ-vc-kLV" secondAttribute="trailing" id="bfG-XS-14a"/>
                             <constraint firstItem="Fxd-sf-GbY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ijL-Wv-udJ"/>
                             <constraint firstAttribute="trailing" secondItem="Fxd-sf-GbY" secondAttribute="trailing" id="k6C-rL-nR0"/>
                             <constraint firstAttribute="trailing" secondItem="t0B-qE-dSv" secondAttribute="trailing" id="kTe-o2-IrO"/>
                             <constraint firstItem="Fxd-sf-GbY" firstAttribute="leading" secondItem="deJ-vc-kLV" secondAttribute="leading" id="qEt-gt-3ej"/>
+                            <constraint firstItem="Gg3-s9-Sam" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="tZW-47-a8l"/>
                             <constraint firstItem="deJ-vc-kLV" firstAttribute="top" secondItem="Fxd-sf-GbY" secondAttribute="top" id="tjG-iX-QDd"/>
                             <constraint firstItem="t0B-qE-dSv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="uVo-Ys-f0B"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Fxd-sf-GbY" secondAttribute="bottom" constant="1" id="ukI-DK-Vd7"/>

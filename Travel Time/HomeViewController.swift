@@ -26,6 +26,9 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
     
     var timer = Timer()
     var timerRunning = false
+    var regionSet = false
+    var bound = MKMapRect()
+    var polylineCount = 0
     
     var homeAddress = [""]
     var workAddress = [""]
@@ -43,6 +46,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
         super.viewDidLoad()
         mapView.delegate = self
         self.mapView.showsUserLocation = false
+        self.regionSet = false
         self.addSlideMenuButton()
         self.addMapsMenuButton()
         self.convertAddress()
@@ -80,13 +84,15 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
             self.greyBG.isHidden = true
             self.mapView.isUserInteractionEnabled = true
         }
+        locationManager.requestLocation()
         print(error.localizedDescription)
     }
     
     func convertAddress() {
         let addressArray = UserDefaults.standard.value(forKey: "homeAddress") as! Array<String>
         let rawAddress = addressArray[0]
-        globalAddress = rawAddress
+        let formattedAddress = rawAddress.replacingOccurrences(of: " ", with: "+")
+        globalAddress = formattedAddress
 
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(rawAddress) { (placemarks, error) in
@@ -127,6 +133,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
         var summaryText = ""
         var count = 0
         var distance = 0.0
+        polylineCount = 0
         
         let units = getUnits()
         
@@ -136,13 +143,21 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
         let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
         let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
 
+        let sourceAnnotation = MKPointAnnotation()
+        sourceAnnotation.title = "Starting Location"
+        if let location = sourcePlacemark.location {
+            sourceAnnotation.coordinate = location.coordinate
+        }
+        
         let destinationAnnotation = MKPointAnnotation()
         destinationAnnotation.title = "Ending Location"
         if let location = destinationPlacemark.location {
             destinationAnnotation.coordinate = location.coordinate
         }
         
-        self.mapView.showAnnotations([destinationAnnotation], animated: true )
+        if self.regionSet == false {
+        self.mapView.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
+        }
 
         let directionRequest = MKDirectionsRequest()
         directionRequest.source = sourceMapItem
@@ -162,6 +177,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
                 
                 return
             }
+            self.mapView.removeOverlays(self.mapView.overlays)
             for route in response.routes {
                 count += 1
                 self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
@@ -183,11 +199,12 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
                     summaryText.append("\(routeTime) via \(route.name) (\(distance.truncate(places: 1)) \(units))")
                 }
             }
-            
+            if self.regionSet == false {
+            self.regionSet = true
             let rect = response.routes[0].polyline.boundingMapRect
-            let bound = self.mapView.mapRectThatFits(rect, edgePadding: UIEdgeInsetsMake(90, 35, 35, 50))
-            self.mapView.setRegion(MKCoordinateRegionForMapRect(bound), animated: false)
-            
+            self.bound = self.mapView.mapRectThatFits(rect, edgePadding: UIEdgeInsetsMake(90, 35, 35, 50))
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(self.bound), animated: false)
+            }
             self.directionsLabel.text = summaryText
             self.updateUI(success: true)
             if self.timerRunning == false {
@@ -217,8 +234,20 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, MKMapVi
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 3.0
+        // Run through lines and change as they go
+        if polylineCount == 0 {
+            renderer.strokeColor = UIColor.blue
+            polylineCount += 1
+        } else if polylineCount == 1 {
+            renderer.strokeColor = UIColor.green
+            polylineCount += 1
+        } else if polylineCount == 2 {
+            renderer.strokeColor = UIColor.red
+            polylineCount += 1
+        } else {
+            renderer.strokeColor = UIColor.black
+        }
         
         return renderer
     }
